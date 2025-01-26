@@ -1,0 +1,3 @@
+#	• Description: Retrieves installed updates, including HotFix IDs and installation dates.
+#	• Usage: Quickly verify whether updates have been applied and in what order.
+Get-WmiObject -Class Win32_QuickFixEngineering | Select-Object HotFixID, Description, InstalledOn | Sort-Object InstalledOn
