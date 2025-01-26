@@ -1,0 +1,4 @@
+#	• Description: Retrieves the 20 most recent critical errors from the System log.
+#	• Usage: Investigate system-related errors.
+
+Get-EventLog -LogName System -EntryType Error -Newest 20 | Select-Object TimeGenerated, EntryType, Source, Message
