@@ -1,0 +1,17 @@
+#	• Description: Initiates a remote PowerShell session, runs a command to list stopped services, and then closes the session.
+#	• Usage: Use for remote server administration and troubleshooting without needing to log in directly.
+
+# Define Remote Server
+$RemoteServer = "RemoteServer"
+
+# Start Remote PowerShell Session
+$Session = New-PSSession -ComputerName $RemoteServer -Credential (Get-Credential)
+
+# Run Command on Remote Server
+Invoke-Command -Session $Session -ScriptBlock {
+    Get-Service | Where-Object { $_.Status -eq "Stopped" }
+}
+
+# Close Remote Session
+Remove-PSSession -Session $Session
+Write-Host "Remote PowerShell session ended." -ForegroundColor Green
