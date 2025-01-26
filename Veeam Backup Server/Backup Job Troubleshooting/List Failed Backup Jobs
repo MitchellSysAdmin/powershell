@@ -1,0 +1,4 @@
+#	○ Description: Retrieves all backup jobs that have failed.
+#	○ Use Case: Identifies jobs requiring immediate attention.
+
+Get-VBRBackupSession | Where-Object {$_.Result -eq "Failed"}
