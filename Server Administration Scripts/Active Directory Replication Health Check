@@ -1,0 +1,9 @@
+#	• Description: Checks the status of Active Directory replication between domain controllers.
+#	• Usage: Ensure that domain controllers are replicating correctly, avoiding potential directory service inconsistencies.
+
+# Check AD Replication Status
+$ReplicationStatus = Get-ADReplicationPartnerMetadata -Target * | Select-Object Partner, LastReplicationSuccess, LastReplicationResult
+
+# Display Replication Health
+Write-Host "Active Directory Replication Status:" -ForegroundColor Green 
+$ReplicationStatus | Format-Table Partner, LastReplicationSuccess, LastReplicationResult
