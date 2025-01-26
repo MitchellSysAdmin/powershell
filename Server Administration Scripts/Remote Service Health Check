@@ -1,0 +1,13 @@
+#	• Description: Checks for stopped or non-running services on multiple remote servers.
+#	• Usage: Monitor and troubleshoot critical service failures across a server farm.
+
+# Define Remote Servers
+$Servers = @("Server1", "Server2", "Server3")
+
+# Check Services on Each Server
+$Servers | ForEach-Object {
+    Write-Host "Checking services on $_..." -ForegroundColor Green
+    Invoke-Command -ComputerName $_ -ScriptBlock {
+        Get-Service | Where-Object { $_.Status -ne "Running" } | Select-Object DisplayName, Status
+    }
+}
