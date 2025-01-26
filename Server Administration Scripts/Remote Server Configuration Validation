@@ -1,0 +1,18 @@
+#	• Description: Runs configuration checks (Windows Update, Network settings, Time Zone) on multiple remote servers.
+#	• Usage: Validate consistent configurations across a fleet of servers.
+
+# Define List of Remote Servers
+$RemoteServers = @("Server1", "Server2", "Server3")
+
+# Run Configuration Validation on Each Server
+$RemoteServers | ForEach-Object {
+    Write-Host "Checking configuration on $_..." -ForegroundColor Cyan
+    Invoke-Command -ComputerName $_ -ScriptBlock {
+        # Check Windows Update Service
+        Get-Service -Name wuauserv | Select-Object Name, Status
+        # Check Network Configuration
+        Get-NetIPAddress
+        # Check Time Zone
+        Get-TimeZone
+    }
+}
