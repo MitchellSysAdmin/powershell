@@ -1,0 +1,4 @@
+#	• Description: Lists processes consuming significant CPU time.
+#	• Usage: Investigate processes causing high CPU usage.
+
+Get-Process | Where-Object { $_.CPU -gt 100 } | Select-Object Name, CPU, Id
