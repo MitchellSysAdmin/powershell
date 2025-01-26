@@ -1,0 +1,24 @@
+#	• Description: Collects critical system metrics, including disk space, CPU usage, memory usage, and basic system information.
+#	• Usage: Run to quickly assess overall server health.
+
+# Get System Information
+$SystemInfo = Get-ComputerInfo | Select-Object CsName, OsName, WindowsVersion, WindowsBuildLabEx
+
+# Check Disk Space
+$DiskUsage = Get-PSDrive -PSProvider FileSystem | Select-Object Name, @{Name="UsedGB";Expression={($_.Used/1GB)}}, @{Name="FreeGB";Expression={($_.Free/1GB)}}
+
+# Check CPU Usage
+$CPUUsage = Get-Counter -Counter "\Processor(_Total)\% Processor Time" -SampleInterval 1 -MaxSamples 5 | Select-Object -ExpandProperty CounterSamples
+
+# Check Memory Usage
+$MemoryUsage = Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory
+
+# Display Results
+Write-Host "System Information:" -ForegroundColor Green
+$SystemInfo
+Write-Host "Disk Usage:" -ForegroundColor Green
+$DiskUsage
+Write-Host "CPU Usage:" -ForegroundColor Green
+$CPUUsage
+Write-Host "Memory Usage (in KB):" -ForegroundColor Green
+$MemoryUsage
