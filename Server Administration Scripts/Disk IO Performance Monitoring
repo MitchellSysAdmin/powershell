@@ -1,0 +1,16 @@
+#	• Description: Monitors disk input/output performance and triggers an alert if the disk's read/write throughput exceeds a threshold.
+#	• Usage: Identifies and alerts on high disk I/O activity, which can impact server performance.
+
+# Define Disk Performance Threshold (in MB/s)
+$DiskThreshold = 50
+
+# Get Disk I/O Performance Metrics
+$DiskStats = Get-Counter -Counter "\PhysicalDisk(*)\Disk Bytes/sec"
+
+# Display Current Disk Performance
+$DiskStats | ForEach-Object {
+    Write-Host "Disk: $($_.InstanceName) - Read: $([math]::round($_.CookedValue / 1MB, 2)) MB/s" -ForegroundColor Cyan
+    if ($_.CookedValue / 1MB -gt $DiskThreshold) {
+        Write-Host "Alert: Disk $($_.InstanceName) is exceeding the threshold of $DiskThreshold MB/s" -ForegroundColor Red
+    }
+}
