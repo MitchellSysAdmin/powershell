@@ -1,0 +1,4 @@
+#	○ Description: Verifies the health of Exchange services.
+#	○ Use Case: Ensure all required services are running.
+
+Test-ServiceHealth
