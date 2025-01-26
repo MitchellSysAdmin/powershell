@@ -1,0 +1,15 @@
+#	• Description: Displays network adapter statistics for a specified network interface, including received and sent bytes.
+#	• Usage: Monitor network utilization and troubleshoot bandwidth issues.
+
+# Define Network Interface
+$InterfaceName = "Ethernet"
+
+# Get Network Adapter Statistics
+$NetStats = Get-NetAdapterStatistics -Name $InterfaceName
+
+# Display Interface Utilization
+Write-Host "Network Utilization for $InterfaceName:" -ForegroundColor Green
+Write-Host "Received Bytes: $([math]::round($NetStats.ReceivedBytes / 1MB, 2)) MB"
+Write-Host "Sent Bytes: $([math]::round($NetStats.SentBytes / 1MB, 2)) MB"
+Write-Host "Packets Received: $($NetStats.ReceivedPackets)"
+Write-Host "Packets Sent: $($NetStats.SentPackets)"
