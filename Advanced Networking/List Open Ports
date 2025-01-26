@@ -1,0 +1,4 @@
+#	• Description: Lists all open ports on the server.
+#	• Usage: Identify listening ports for applications or potential vulnerabilities.
+
+Get-NetTCPConnection | Where-Object { $_.State -eq "Listen" } | Select-Object LocalAddress, LocalPort
