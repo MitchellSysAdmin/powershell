@@ -1,0 +1,4 @@
+#	○ Description: Lists all mailboxes in the organization.
+#	○ Use Case: Verify the presence of mailboxes and their configurations.
+
+Get-Mailbox -ResultSize Unlimited
