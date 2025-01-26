@@ -1,0 +1,17 @@
+#	• Description: Checks the status of critical services and attempts to restart any that are not running.
+#	• Usage: Automate service recovery for essential services on Windows Servers.
+
+# Define Critical Services
+$CriticalServices = @("wuauserv", "spooler", "netlogon")
+
+# Check Service Status
+$CriticalServices | ForEach-Object {
+    $Service = Get-Service -Name $_
+    if ($Service.Status -ne "Running") {
+        Write-Host "$($_) is not running. Attempting to restart..." -ForegroundColor Red
+        # Attempt to restart the service
+        Restart-Service -Name $_ -Force
+    } else {
+        Write-Host "$($_) is running normally." -ForegroundColor Green
+    }
+}
