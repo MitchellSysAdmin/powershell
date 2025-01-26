@@ -1,0 +1,40 @@
+#	• Description: This script checks the backup directories for files and generates a report on the last backup date. It logs the report and highlights any directories missing recent backups.
+#	• Usage: Use for verifying the status of your backup system and ensuring that backups are running on schedule. It can be expanded to include email alerts or more detailed backup verifications.
+
+# Define Backup Directory and Log File
+$BackupDirectory = "D:\Backups"
+$LogFile = "C:\BackupLogs\BackupStatus_$(Get-Date -Format 'yyyyMMdd').log"
+
+# Check for Backup Folders and Files
+$BackupFolders = Get-ChildItem -Path $BackupDirectory -Directory
+
+# Generate Backup Report
+$BackupReport = @()
+foreach ($folder in $BackupFolders) {
+    $folderPath = $folder.FullName
+    $lastBackupTime = (Get-Item -Path $folderPath).LastWriteTime
+    $isRecentBackup = if ($lastBackupTime -gt (Get-Date).AddDays(-1)) { "Yes" } else { "No" }
+
+# Add to Report
+    $BackupReport += [PSCustomObject]@{
+        FolderName     = $folder.Name
+        LastBackupTime = $lastBackupTime
+        RecentBackup   = $isRecentBackup
+    }
+}
+
+# Output the Report to Log File
+$BackupReport | Export-Csv -Path $LogFile -NoTypeInformation
+
+# Display the Backup Report on Screen
+Write-Host "Backup Report:" -ForegroundColor Green
+$BackupReport | Format-Table -Property FolderName, LastBackupTime, RecentBackup
+
+# Check if Recent Backups Are Missing
+$MissingBackupFolders = $BackupReport | Where-Object { $_.RecentBackup -eq "No" }
+if ($MissingBackupFolders) {
+    Write-Host "ALERT: Missing Recent Backups!" -ForegroundColor Red
+    $MissingBackupFolders | Format-Table -Property FolderName, LastBackupTime
+} else {
+    Write-Host "All backups are up to date." -ForegroundColor Green
+}
