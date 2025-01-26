@@ -1,0 +1,16 @@
+#	• Description: Checks the status of all scheduled tasks and reports any tasks that failed to run.
+#	• Usage: Automate the monitoring of scheduled tasks to ensure important maintenance jobs run correctly.
+
+# Get All Scheduled Tasks
+$ScheduledTasks = Get-ScheduledTask
+
+# Filter Tasks with Failed Last Run Status
+$FailedTasks = $ScheduledTasks | Where-Object { $_.State -eq 'Failed' }
+
+# Display Failed Tasks
+if ($FailedTasks) {
+    Write-Host "The following scheduled tasks have failed:" -ForegroundColor Red
+    $FailedTasks | Select-Object TaskName, LastRunTime, LastTaskResult | Format-Table
+} else {
+    Write-Host "All scheduled tasks ran successfully." -ForegroundColor Green
+}
