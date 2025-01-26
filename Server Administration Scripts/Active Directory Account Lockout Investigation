@@ -1,0 +1,16 @@
+#	• Description: Queries the Security Event Log for recent account lockout events and provides a summary.
+#	• Usage: Investigate and address account lockouts that might indicate authentication issues or security threats.
+
+# Define Lockout Time Threshold (in minutes)
+$LockoutThreshold = 30
+
+# Get Recent Account Lockout Events
+$LockoutEvents = Get-WinEvent -LogName Security | Where-Object { $_.Id -eq 4740 -and $_.TimeCreated -gt (Get-Date).AddMinutes(-$LockoutThreshold) }
+
+# Analyze and Report
+if ($LockoutEvents) {
+    Write-Host "Recent Account Lockouts (Last $LockoutThreshold minutes):" -ForegroundColor Red
+    $LockoutEvents | Select-Object TimeCreated, Message | Format-Table
+} else {
+    Write-Host "No lockout events in the last $LockoutThreshold minutes." -ForegroundColor Green
+}
