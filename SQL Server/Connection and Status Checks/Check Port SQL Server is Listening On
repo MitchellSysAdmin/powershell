@@ -1,0 +1,4 @@
+# Customization: Replace [PortNumber] with the port number your SQL Server is configured to listen on (e.g., 1433 for the default).
+# Use Case: Verifies that SQL Server is listening on the correct port.
+
+Get-NetTCPConnection | Where-Object {$_.State -eq "Listen" -and $_.LocalPort -eq [PortNumber]}
