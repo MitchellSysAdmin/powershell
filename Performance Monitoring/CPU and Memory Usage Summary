@@ -1,0 +1,4 @@
+#	• Description: Displays processes using the most CPU and memory.
+#	• Usage: Quickly identify resource-hogging processes.
+
+Get-Process | Select-Object Name, @{Name="CPU(%)";Expression={($_.CPU)}}, @{Name="Memory(MB)";Expression={($_.WorkingSet/1MB)}} | Sort-Object CPU -Descending
