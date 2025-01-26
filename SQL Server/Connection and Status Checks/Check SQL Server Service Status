@@ -1,0 +1,4 @@
+# Customization: Replace [MSSQLServerServiceName] with the name of the SQL Server service (e.g., MSSQLSERVER or MSSQL$InstanceName).
+# Use Case: Confirms whether the SQL Server service is running on the server.
+
+Get-Service -Name "[MSSQLServerServiceName]"
