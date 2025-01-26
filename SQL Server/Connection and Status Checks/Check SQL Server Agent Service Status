@@ -1,0 +1,4 @@
+# Customization: Replace [SQLServerAgentServiceName] with the name of the SQL Server Agent service (e.g., SQLSERVERAGENT or SQLSERVERAGENT$InstanceName).
+# Use Case: Ensures SQL Server Agent (required for job scheduling) is running.
+
+Get-Service -Name "[SQLServerAgentServiceName]"
