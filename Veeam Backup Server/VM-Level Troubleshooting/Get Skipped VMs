@@ -1,0 +1,4 @@
+#	○ Description: Identifies VMs excluded from backup jobs.
+#	○ Use Case: Investigates why VMs are being skipped.
+
+Get-VBRJob | ForEach-Object { $_.GetObjectsInJob() | Where-Object {$_.Status -eq "Skipped"} }
