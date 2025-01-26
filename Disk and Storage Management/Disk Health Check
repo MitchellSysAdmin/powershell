@@ -1,0 +1,4 @@
+#	• Description: Retrieves the health and operational status of all physical disks.
+#	• Usage: Diagnose failing disks or degraded RAID arrays.
+
+Get-PhysicalDisk | Select-Object DeviceID, MediaType, HealthStatus, OperationalStatus
