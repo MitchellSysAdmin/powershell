@@ -1,0 +1,18 @@
+#	• Description: Continuously monitors the server for processes exceeding a defined CPU threshold.
+#	• Usage: Identify and act on resource-intensive processes in real-time.
+
+# Define CPU Threshold
+$CpuThreshold = 80
+
+# Monitor High CPU Processes
+Write-Host "Monitoring CPU Usage..." -ForegroundColor Cyan
+while ($true) {
+    $HighCpuProcesses = Get-Process | Where-Object { $_.CPU -gt $CpuThreshold }
+    if ($HighCpuProcesses) {
+        Write-Host "High CPU Processes Detected:" -ForegroundColor Red
+        $HighCpuProcesses | Select-Object Name, Id, CPU | Format-Table
+    } else {
+        Write-Host "No high CPU processes found." -ForegroundColor Green
+    }
+    Start-Sleep -Seconds 10
+}
