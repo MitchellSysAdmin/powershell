@@ -1,0 +1,15 @@
+#	• Description: Automates the creation of a new Active Directory user account, assigns a password, and adds the user to a group.
+#	• Usage: Simplifies the process of user account creation and group membership management in AD.
+
+# Define New User Information
+$FirstName = "John"
+$LastName = "Doe"
+$Username = "jdoe"
+$Password = "P@ssw0rd!"
+
+# Create the New User
+New-ADUser -SamAccountName $Username -UserPrincipalName "$Username@domain.com" -Name "$FirstName $LastName" -GivenName $FirstName -Surname $LastName -DisplayName "$FirstName $LastName" -PasswordNeverExpires $true -AccountPassword (ConvertTo-SecureString -AsPlainText $Password -Force) -Enabled $true
+
+# Add to a Group (e.g., "Employees")
+Add-ADGroupMember -Identity "Employees" -Members $Username
+Write-Host "User $Username created and added to the 'Employees' group." -ForegroundColor Green
