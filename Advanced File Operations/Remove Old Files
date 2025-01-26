@@ -1,0 +1,4 @@
+#	• Description: Deletes all files in C:\Temp older than 30 days.
+#	• Usage: Automate cleanup tasks.
+
+Get-ChildItem -Path "C:\Temp" -Recurse -File | Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-30) } | Remove-Item -Force
