@@ -1,0 +1,4 @@
+#	• Description: Retrieves user accounts that have not logged in for the past 90 days.
+#	• Usage: Identify accounts for cleanup or reactivation.
+
+Search-ADAccount -AccountInactive -UsersOnly -TimeSpan 90.00:00:00 | Select-Object Name, LastLogonDate
