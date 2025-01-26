@@ -1,0 +1,4 @@
+#	○ Description: Displays repository I/O stats.
+#	○ Use Case: Identifies underperforming repositories.
+
+Get-VBRBackupRepository | ForEach-Object { $_.GetPerformanceStats() }
