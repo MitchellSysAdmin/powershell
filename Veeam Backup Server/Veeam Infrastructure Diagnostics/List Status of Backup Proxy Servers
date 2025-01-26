@@ -1,0 +1,4 @@
+#	○ Description: Lists the status of all backup proxies.
+#	○ Use Case: Confirms proxy servers are online and operational.
+
+Get-VBRBackupProxy | Select-Object Name, IsAvailable
