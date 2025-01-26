@@ -1,0 +1,4 @@
+#	• Description: Displays used and free space for each logical drive.
+#	• Usage: Assess disk space for capacity planning.
+
+Get-PSDrive -PSProvider FileSystem | Select-Object Name, @{Name="UsedSpace(GB)";Expression={($_.Used/1GB)}}, @{Name="FreeSpace(GB)";Expression={($_.Free/1GB)}}
