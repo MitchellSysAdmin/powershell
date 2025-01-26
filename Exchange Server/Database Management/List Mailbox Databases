@@ -1,0 +1,4 @@
+#	○ Description: Lists all mailbox databases and their status.
+# ○ Use Case: Check if all databases are mounted and operational.
+
+Get-MailboxDatabase -Status | Format-Table Name, Server, Mounted
