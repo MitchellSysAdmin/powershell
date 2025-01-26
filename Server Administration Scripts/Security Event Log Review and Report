@@ -1,0 +1,14 @@
+#	• Description: Retrieves failed login attempts (Event ID 4625) from the Security Event Log within the last 7 days, and groups them by account name.
+#	• Usage: Quickly audit for failed login attempts, a critical indicator of possible security issues.
+
+# Define Time Period for Review (Last 7 days)
+$StartDate = (Get-Date).AddDays(-7)
+
+# Get Security Event Logs (Failed Logins)
+$FailedLogins = Get-WinEvent -LogName Security | Where-Object { $_.Id -eq 4625 -and $_.TimeCreated -gt $StartDate }
+
+# Group Events by Account Name and Count Occurrences
+$FailedLoginCounts = $FailedLogins | Group-Object -Property Message | Select-Object Name, Count | Sort-Object Count -Descending
+
+# Display Failed Logins
+Write-Host "Failed Login Attempts in the Last 7 Days:" -ForegroundColor Red $FailedLoginCounts | Format-Table -Property Name, Count
