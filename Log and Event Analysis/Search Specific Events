@@ -1,0 +1,4 @@
+#	• Description: Retrieves failed login attempts (Event ID 4625).
+#	• Usage: Audit security events for potential intrusions.
+
+Get-WinEvent -LogName Security | Where-Object { $_.Id -eq 4625 } | Select-Object TimeCreated, Message
