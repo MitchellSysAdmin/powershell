@@ -1,0 +1,14 @@
+#	• Description: Archives event logs older than 30 days and clears the logs from the system.
+#	• Usage: Maintain server health and prevent event log bloat by automatically purging old logs and saving them for compliance or future reference.
+
+# Define Log Files to Purge
+$LogFiles = @("Application", "System", "Security")
+
+# Purge Logs Older Than 30 Days
+$LogFiles | ForEach-Object {
+    Write-Host "Archiving and clearing log: $_..." -ForegroundColor Yellow
+    $Logs = Get-WinEvent -LogName $_ | Where-Object { $_.TimeCreated -lt (Get-Date).AddDays(-30) }
+    $Logs | Export-Csv -Path "C:\EventLogs\$_-$(Get-Date -Format 'yyyyMMdd').csv" -NoTypeInformation
+    Clear-EventLog -LogName $_
+}
+Write-Host "Event logs archived and purged." -ForegroundColor Green
