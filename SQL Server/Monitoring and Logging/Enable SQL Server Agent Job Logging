@@ -1,0 +1,4 @@
+# Customization: Replace [SQLServerInstanceName] and [JobName] with the SQL Server instance name and the job name, respectively.
+# Use Case: Configures a job to log errors in the SQL Server Agent logs.
+
+Invoke-Sqlcmd -ServerInstance "[SQLServerInstanceName]" -Query "EXEC msdb.dbo.sp_update_job @job_name='[JobName]', @notify_level_eventlog=2"
