@@ -1,0 +1,4 @@
+#	• Description: Executes a command on a remote server.
+#	• Usage: Manage services or retrieve system data from remote servers.
+
+Invoke-Command -ComputerName <ServerName> -ScriptBlock { Get-Service }
