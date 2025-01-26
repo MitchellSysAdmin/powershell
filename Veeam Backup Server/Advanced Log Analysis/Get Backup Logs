@@ -1,0 +1,4 @@
+#	○ Description: Collects logs for backup jobs.
+#	○ Use Case: Analyzes logs for failures.
+
+Get-VBRBackupSessionLog -Session (Get-VBRBackupSession | Select-Object -First 1)
