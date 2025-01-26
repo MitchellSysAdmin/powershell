@@ -1,0 +1,4 @@
+#	○ Description: Adjusts the logging level for transport events.
+#	○ Use Case: Enable detailed logs for troubleshooting.
+
+Set-EventLogLevel -Identity "MSExchange Transport" -Level High
