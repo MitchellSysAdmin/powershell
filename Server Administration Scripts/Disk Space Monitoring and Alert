@@ -1,0 +1,17 @@
+#	• Description: Monitors disk space usage and triggers an alert if the used space exceeds a defined threshold (in GB).
+#	• Usage: Use to monitor disk space and prevent filling up important volumes. Can be enhanced to send email alerts.
+
+# Set Disk Space Threshold (in GB)
+$ThresholdGB = 10
+
+# Get Disk Usage
+$DiskUsage = Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Used -gt ($ThresholdGB * 1GB) }
+
+# Send Alert if Threshold Exceeded
+$DiskUsage | ForEach-Object {
+    if ($_.Used / 1GB -gt $ThresholdGB) {
+        Write-Host "Disk $($_.Name) is running low on space!" -ForegroundColor Red
+        Write-Host "Used: $([math]::round($_.Used / 1GB, 2)) GB, Free: $([math]::round($_.Free / 1GB, 2)) GB" -ForegroundColor Yellow
+        # You can send an email or create a log entry here
+    }
+}
