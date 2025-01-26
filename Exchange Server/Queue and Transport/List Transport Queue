@@ -1,0 +1,4 @@
+#	○ Description: Displays all transport queues and their status.
+#	○ Use Case: Monitor email flow and identify delays.
+
+Get-Queue
