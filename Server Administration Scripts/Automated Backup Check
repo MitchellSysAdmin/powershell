@@ -1,0 +1,17 @@
+#	• Description: Verifies the presence and freshness of backup files.
+#	• Usage: Automate daily backup audits to ensure data integrity and compliance.
+
+# Define Backup Path
+$BackupPath = "\\BackupServer\Backups"
+
+# Check Backup File Status
+$BackupFiles = Get-ChildItem -Path $BackupPath -Recurse -File | Sort-Object LastWriteTime -Descending | Select-Object FullName, LastWriteTime -First 5
+
+# Validate Most Recent Backup
+Write-Host "Most Recent Backups:" -ForegroundColor Yellow
+$BackupFiles
+if ((Get-Date) - $BackupFiles[0].LastWriteTime).Days -gt 1) {
+    Write-Host "WARNING: No recent backups found within the last 24 hours!" -ForegroundColor Red
+} else {
+    Write-Host "Backup check passed. Recent backups are available." -ForegroundColor Green
+}
