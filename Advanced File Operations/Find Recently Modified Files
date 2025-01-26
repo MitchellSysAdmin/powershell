@@ -1,0 +1,4 @@
+#	• Description: Lists all files modified within the past 7 days.
+#	• Usage: Track recent changes for troubleshooting or auditing.
+
+Get-ChildItem -Path C:\ -Recurse -File | Where-Object { $_.LastWriteTime -gt (Get-Date).AddDays(-7) } | Select-Object Name, FullName, LastWriteTime
