@@ -1,0 +1,4 @@
+#	• Description: Counts all Active Directory objects grouped by their type (e.g., users, groups, computers).
+#	• Usage: Obtain an overview of AD content.
+
+(Get-ADObject -Filter * | Group-Object objectClass).Group | Select-Object Name, Count
