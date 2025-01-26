@@ -1,0 +1,4 @@
+#	○ Description: Verifies the memory available on the Veeam server.
+#	○ Use Case: Identifies potential memory shortages affecting backups.
+
+Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object FreePhysicalMemory, TotalVisibleMemorySize
