@@ -1,0 +1,25 @@
+#	• Description: Monitors network bandwidth usage for a specific network interface and triggers alerts if thresholds are exceeded.
+#	• Usage: Helps monitor and troubleshoot network bandwidth consumption in real time.
+
+# Define Network Interface
+$InterfaceName = "Ethernet"
+
+# Get Network Adapter Statistics
+$NetStats = Get-NetAdapterStatistics -Name $InterfaceName
+
+# Display Interface Bandwidth Usage
+Write-Host "Network Bandwidth Utilization for $InterfaceName:" -ForegroundColor Cyan
+Write-Host "Received Bytes: $([math]::round($NetStats.ReceivedBytes / 1MB, 2)) MB"
+Write-Host "Sent Bytes: $([math]::round($NetStats.SentBytes / 1MB, 2)) MB"
+Write-Host "Packets Received: $($NetStats.ReceivedPackets)"
+Write-Host "Packets Sent: $($NetStats.SentPackets)"
+
+# Set a bandwidth threshold (in MB) for alert
+$ReceivedThreshold = 500 # in MB
+$SentThreshold = 500 # in MB
+if ($NetStats.ReceivedBytes / 1MB -gt $ReceivedThreshold) {
+    Write-Host "Alert: High Received Bandwidth Usage!" -ForegroundColor Red
+}
+if ($NetStats.SentBytes / 1MB -gt $SentThreshold) {
+    Write-Host "Alert: High Sent Bandwidth Usage!" -ForegroundColor Red
+}
