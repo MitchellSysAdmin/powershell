@@ -1,0 +1,13 @@
+#	• Description: Backs up all Group Policy Objects (GPOs) to a specified directory with a timestamped folder name.
+#	• Usage: Automate GPO backups as part of a server's routine configuration management.
+
+# Backup Group Policy Objects (GPOs)
+$BackupPath = "C:\GPO_Backups"
+$BackupName = "GPO_Backup_" + (Get-Date -Format "yyyyMMdd_HHmmss")
+
+# Create Backup Folder
+New-Item -Path $BackupPath -Name $BackupName -ItemType Directory
+
+# Backup All GPOs
+Backup-Gpo -All -Path "$BackupPath\$BackupName"
+Write-Host "Group Policy Objects backup completed and saved to $BackupPath\$BackupName" -ForegroundColor Green
