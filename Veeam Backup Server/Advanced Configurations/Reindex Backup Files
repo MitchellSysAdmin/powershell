@@ -1,0 +1,4 @@
+#	○ Description: Reindexes backup files in a repository.
+#	○ Use Case: Resolves indexing issues.
+
+Start-VBRRepositoryRescan -Repository "Repo01"
