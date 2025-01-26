@@ -1,0 +1,55 @@
+#	• Description: This script checks the health of the system's CPU, memory, disk, network adapter, and temperature (if supported).
+#	• Usage: Use to perform a detailed health check of system hardware, ensuring everything is running optimally. You can customize it to include more hardware checks or log the results.
+
+# Define System Health Check Components
+$HardwareHealth = @(
+    "CPU", "Memory", "Disk", "Network Adapter", "Temperature"
+)
+
+# Function to Check CPU Health
+function Check-CPUHealth {
+    $cpu = Get-WmiObject -Class Win32_Processor
+    Write-Host "CPU Status: $($cpu.Name) - Load: $($cpu.LoadPercentage)%"
+}
+
+# Function to Check Memory Health
+function Check-MemoryHealth {
+    $memory = Get-WmiObject -Class Win32_OperatingSystem
+    $totalMemory = [math]::round($memory.TotalVisibleMemorySize / 1MB, 2)
+    $freeMemory = [math]::round($memory.FreePhysicalMemory / 1MB, 2)
+    $usedMemory = $totalMemory - $freeMemory
+    Write-Host "Memory Status: Total: $totalMemory MB, Used: $usedMemory MB, Free: $freeMemory MB"
+}
+
+# Function to Check Disk Health
+function Check-DiskHealth {
+    $disk = Get-WmiObject -Class Win32_LogicalDisk | Where-Object { $_.DriveType -eq 3 }
+    $disk | ForEach-Object {
+        $diskUsage = [math]::round($_.FreeSpace / $_.Size * 100, 2)
+        Write-Host "Disk Status: Drive $($_.DeviceID) - $($_.VolumeName), Free: $([math]::round($_.FreeSpace / 1GB, 2)) GB, Used: $([math]::round($_.Size / 1GB, 2)) GB ($diskUsage% free)"
+    }
+}
+
+# Function to Check Network Adapter Health
+function Check-NetworkHealth {
+    $network = Get-NetAdapter
+    $network | ForEach-Object {
+        Write-Host "Network Adapter Status: $_.Name - Status: $_.Status"
+    }
+}
+
+# Function to Check Temperature (if supported)
+function Check-Temperature {
+    $temperature = Get-WmiObject -Class Win32_TemperatureProbe
+    $temperature | ForEach-Object {
+        Write-Host "Temperature Status: $($_.CurrentReading)°C"
+    }
+}
+
+# Run System Health Check
+Write-Host "Running Hardware Health Check..." -ForegroundColor Cyan
+Check-CPUHealth
+Check-MemoryHealth
+Check-DiskHealth
+Check-NetworkHealth
+Check-Temperature
