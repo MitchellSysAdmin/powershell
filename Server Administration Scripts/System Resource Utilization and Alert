@@ -1,0 +1,17 @@
+#	• Description: Monitors CPU, memory, and disk usage against defined thresholds, and triggers alerts when usage exceeds limits.
+#	• Usage: Automate resource utilization monitoring and alerting to prevent resource exhaustion.
+
+# Define Thresholds
+$CpuThreshold = 80
+$MemoryThreshold = 90
+$DiskThreshold = 85
+
+# Monitor Resources
+$CpuUsage = (Get-WmiObject Win32_Processor).LoadPercentage
+$MemoryUsage = ((Get-WmiObject Win32_OperatingSystem).TotalVisibleMemorySize - (Get-WmiObject Win32_OperatingSystem).FreePhysicalMemory) / (Get-WmiObject Win32_OperatingSystem).TotalVisibleMemorySize * 100
+$DiskUsage = (Get-PSDrive C).Used / (Get-PSDrive C).Used + (Get-PSDrive C).Free * 100
+
+# Trigger Alerts if Resource Usage is High
+if ($CpuUsage -gt $CpuThreshold) { Write-Host "CPU usage is high: $CpuUsage%" -ForegroundColor Red }
+if ($MemoryUsage -gt $MemoryThreshold) { Write-Host "Memory usage is high: $([math]::round($MemoryUsage, 2))%" -ForegroundColor Red }
+if ($DiskUsage -gt $DiskThreshold) { Write-Host "Disk usage is high: $([math]::round($DiskUsage, 2))%" -ForegroundColor Red }
