@@ -1,0 +1,4 @@
+#	• Description: Lists the 10 largest files on the C:\ drive, including their size in MB.
+#	• Usage: Locate large files consuming disk space.
+
+Get-ChildItem -Path C:\ -Recurse -File | Sort-Object Length -Descending | Select-Object Name, Directory, @{Name="SizeMB";Expression={($_.Length/1MB)}} -First 10
