@@ -1,0 +1,4 @@
+#	○ Description: Verifies if a required port is open.
+#	○ Use Case: Confirms ports required for backups are open.
+
+Test-NetConnection -ComputerName "BackupServer" -Port 9401
