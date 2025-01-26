@@ -1,0 +1,17 @@
+#	• Description: Verifies if specific critical patches are installed on the server.
+#	• Usage: Automate compliance checks for mandatory updates.
+
+# Define Critical KBs to Check
+$CriticalKBs = @("KB5005565", "KB5006670")
+
+# Check Installed Updates
+$InstalledUpdates = Get-HotFix | Where-Object { $CriticalKBs -contains $_.HotFixID }
+
+# Validate Updates
+foreach ($KB in $CriticalKBs) {
+    if ($InstalledUpdates.HotFixID -contains $KB) {
+        Write-Host "Patch $KB is installed." -ForegroundColor Green
+    } else {
+        Write-Host "Patch $KB is NOT installed!" -ForegroundColor Red
+    }
+}
