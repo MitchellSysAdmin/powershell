@@ -1,0 +1,4 @@
+#	○ Description: Verifies which jobs use encryption.
+#	○ Use Case: Ensures compliance with encryption policies.
+
+Get-VBRJob | Select-Object Name, EncryptionEnabled
