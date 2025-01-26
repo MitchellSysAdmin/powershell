@@ -1,0 +1,4 @@
+#	○ Description: Displays all available restore points.
+#	○ Use Case: Ensures restore points are available.
+
+Get-VBRRestorePoint
