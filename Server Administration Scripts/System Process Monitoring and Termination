@@ -1,0 +1,22 @@
+#	• Description: Identifies and terminates processes using excessive CPU resources (above a defined threshold).
+#	• Usage: Automate the management of runaway processes that are affecting server performance.
+
+# Define CPU Threshold (in percentage)
+$CpuThreshold = 90
+
+# Get Processes Consuming CPU Over the Threshold
+$HighCpuProcesses = Get-Process | Where-Object { $_.CPU -gt $CpuThreshold }
+
+# Display High CPU Processes
+if ($HighCpuProcesses) {
+    Write-Host "High CPU Processes Detected:" -ForegroundColor Red
+    $HighCpuProcesses | Select-Object Name, CPU | Format-Table
+
+# Optionally, Terminate High CPU Processes
+    $HighCpuProcesses | ForEach-Object {
+        Write-Host "Terminating Process: $($_.Name)" -ForegroundColor Yellow
+        Stop-Process -Id $_.Id -Force
+    }
+} else {
+    Write-Host "No processes are consuming high CPU." -ForegroundColor Green
+}
