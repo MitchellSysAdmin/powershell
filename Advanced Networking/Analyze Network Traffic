@@ -1,0 +1,4 @@
+#	• Description: Displays the amount of traffic (in MB) sent and received by each network adapter.
+# • Usage: Monitor bandwidth usage.
+
+Get-NetAdapterStatistics | Select-Object Name, @{Name="BytesReceived";Expression={($_.ReceivedBytes/1MB)}}, @{Name="BytesSent";Expression={($_.SentBytes/1MB)}}
