@@ -1,0 +1,4 @@
+# Customization: Replace [SQLServerInstanceName] with the name of your SQL Server instance.
+# Use Case: Verifies if the SQL Server instance is reachable over the network.
+
+Test-Connection -ComputerName "[SQLServerInstanceName]" -Count 2
