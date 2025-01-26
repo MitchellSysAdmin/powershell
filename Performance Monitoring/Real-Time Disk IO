@@ -1,0 +1,4 @@
+#	• Description: Monitors real-time disk I/O for 10 seconds.
+#	• Usage: Troubleshoot disk performance issues.
+
+Get-Counter -Counter "\PhysicalDisk(*)\Disk Transfers/sec" -SampleInterval 1 -MaxSamples 10
