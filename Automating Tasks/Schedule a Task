@@ -1,0 +1,4 @@
+#	• Description: Creates a scheduled task to run a PowerShell script daily at 2 AM.
+#	• Usage: Automate routine maintenance tasks.
+
+Register-ScheduledTask -Action (New-ScheduledTaskAction -Execute "Powershell.exe" -Argument "-File C:\Scripts\MyScript.ps1") -Trigger (New-ScheduledTaskTrigger -Daily -At "2:00AM") -TaskName "DailyScript"
