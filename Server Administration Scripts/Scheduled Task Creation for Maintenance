@@ -1,0 +1,12 @@
+#	• Description: Creates a scheduled task to run a maintenance script daily at 2:00 AM.
+#	• Usage: Automate routine server maintenance (e.g., disk cleanup, backups, etc.) with a scheduled task.
+
+# Define Maintenance Task Details
+$TaskName = "ServerMaintenance"
+$TaskAction = New-ScheduledTaskAction -Execute "Powershell.exe" -Argument "-File C:\scripts\Maintenance.ps1"
+$TaskTrigger = New-ScheduledTaskTrigger -Daily -At "02:00AM"
+$TaskPrincipal = New-ScheduledTaskPrincipal -UserId "Administrator" -LogonType ServiceAccount
+
+# Create the Scheduled Task
+Register-ScheduledTask -Action $TaskAction -Trigger $TaskTrigger -Principal $TaskPrincipal -TaskName $TaskName -Description "Server maintenance task"
+Write-Host "Scheduled Task '$TaskName' created successfully." -ForegroundColor Green
