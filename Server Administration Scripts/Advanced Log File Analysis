@@ -1,0 +1,18 @@
+# • Description: Fetches error logs from a specified time period, groups them by source, and summarizes occurrences.
+#	• Usage: Identify recurring issues or pinpoint problematic services/applications.
+
+# Define Parameters
+$LogName = "System"
+$EntryType = "Error"
+$DaysBack = 7
+
+# Get Logs from the Last X Days
+$StartDate = (Get-Date).AddDays(-$DaysBack)
+$Logs = Get-EventLog -LogName $LogName -EntryType $EntryType | Where-Object { $_.TimeGenerated -ge $StartDate }
+
+# Group Logs by Source and Count
+$GroupedLogs = $Logs | Group-Object Source | Sort-Object Count -Descending
+
+# Display Results
+Write-Host "Errors in the '$LogName' Log (Last $DaysBack Days):" -ForegroundColor Yellow
+$GroupedLogs | ForEach-Object {Write-Host "Source: $($_.Name) - Count: $($_.Count)" -ForegroundColor Cyan}
