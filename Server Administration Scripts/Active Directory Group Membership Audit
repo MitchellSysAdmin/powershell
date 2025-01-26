@@ -1,0 +1,17 @@
+#	• Description: Audits and lists all members of a specific Active Directory group (e.g., "Domain Admins").
+#	• Usage: Track and manage group memberships, ensuring only authorized users are part of critical groups.
+
+# Define Group to Audit
+$GroupName = "Domain Admins"
+
+# Get Group Members
+$GroupMembers = Get-ADGroupMember -Identity $GroupName | Select-Object Name, SamAccountName, ObjectClass
+
+# Export Results to CSV
+$ExportPath = "C:\Reports\$GroupName-Members.csv"
+$GroupMembers | Export-Csv -Path $ExportPath -NoTypeInformation
+
+# Display the Results
+Write-Host "Members of the '$GroupName' group:" -ForegroundColor Cyan
+$GroupMembers
+Write-Host "Report exported to $ExportPath" -ForegroundColor Green
