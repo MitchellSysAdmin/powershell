@@ -1,0 +1,17 @@
+#	• Description: Audits inactive AD user accounts and exports the results to a CSV file.
+#	• Usage: Identify dormant accounts for cleanup or reactivation and maintain AD hygiene.
+
+# Define Parameters
+$InactiveDays = 90
+
+# Find Inactive Accounts
+$InactiveAccounts = Search-ADAccount -AccountInactive -UsersOnly -TimeSpan "$InactiveDays.00:00:00" | Select-Object Name, LastLogonDate
+
+# Export Results
+$ExportPath = "C:\Reports\InactiveAccounts.csv"
+$InactiveAccounts | Export-Csv -Path $ExportPath -NoTypeInformation
+
+# Display Summary
+Write-Host "Inactive accounts (Last $InactiveDays Days):" -ForegroundColor Cyan
+$InactiveAccounts
+Write-Host "Report exported to $ExportPath" -ForegroundColor Green
