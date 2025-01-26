@@ -1,0 +1,4 @@
+#	• Description: Displays all active PowerShell sessions.
+#	• Usage: Manage or troubleshoot PowerShell remoting connections.
+
+Get-PSSession | Select-Object Name, ComputerName, State
