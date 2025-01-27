@@ -1,0 +1,4 @@
+# Customization: Replace [SQLServerInstanceName] with the name of your SQL Server instance.
+# Use Case: Lists all SSIS packages that are deployed to the Integration Services catalog.
+
+Invoke-Sqlcmd -ServerInstance "[SQLServerInstanceName]" -Query "SELECT * FROM SSISDB.catalog.packages"
