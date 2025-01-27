@@ -1,0 +1,4 @@
+# Customization: Replace [SQLServerInstanceName] with your SQL Server instance name.
+# Use Case: Displays all currently active sessions on the SQL Server, useful for identifying potential blocking.
+
+Invoke-Sqlcmd -ServerInstance "[SQLServerInstanceName]" -Query "SELECT * FROM sys.dm_exec_sessions"
