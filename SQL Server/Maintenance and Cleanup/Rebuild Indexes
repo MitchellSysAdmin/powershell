@@ -1,0 +1,4 @@
+# Customization: Replace [SQLServerInstanceName] with your SQL Server instance name and [TableName] with the name of the table whose indexes you want to rebuild.
+# Use Case: Rebuilds indexes to improve query performance and reduce fragmentation.
+
+Invoke-Sqlcmd -ServerInstance "[SQLServerInstanceName]" -Query "ALTER INDEX ALL ON [TableName] REBUILD"
