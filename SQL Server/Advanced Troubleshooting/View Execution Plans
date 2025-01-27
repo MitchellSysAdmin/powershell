@@ -1,0 +1,4 @@
+# Customization: Replace [SQLServerInstanceName] with your SQL Server instance name.
+# Use Case: Displays execution plans for queries to troubleshoot slow query performance.
+
+Invoke-Sqlcmd -ServerInstance "[SQLServerInstanceName]" -Query "SET SHOWPLAN_XML ON; GO;"
