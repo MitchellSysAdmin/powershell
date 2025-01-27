@@ -1,0 +1,4 @@
+# Customization: Replace [SQLServerInstanceName] and [JobName] with the SQL Server instance name and the job name, respectively.
+# Use Case: Retrieves the historical execution details of a specific SQL Server job.
+
+Invoke-Sqlcmd -ServerInstance "[SQLServerInstanceName]" -Query "EXEC msdb.dbo.sp_help_jobhistory @job_name='[JobName]'"
