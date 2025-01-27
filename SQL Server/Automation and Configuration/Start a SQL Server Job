@@ -1,0 +1,4 @@
+# Customization: Replace [SQLServerInstanceName] and [JobName] with the SQL Server instance name and the job name, respectively.
+# Use Case: Manually triggers a SQL Server Agent job.
+
+Invoke-Sqlcmd -ServerInstance "[SQLServerInstanceName]" -Query "EXEC msdb.dbo.sp_start_job @job_name='[JobName]'"
