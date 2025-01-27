@@ -1,0 +1,4 @@
+# Customization: Replace [SQLSource] with the SQL Server source name (e.g., MSSQL*) and [NumberOfEntries] with the number of errors to retrieve.
+# Use Case: Retrieves the most recent SQL Server errors from the Windows Event Log.
+
+Get-EventLog -LogName "Application" -EntryType Error -Source "[SQLSource]" -Newest [NumberOfEntries]
