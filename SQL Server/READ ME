@@ -1,0 +1,5 @@
+Before you use these commands:
+	1. Customizations Required: Ensure that placeholders like [SQLServerInstanceName], [JobName], [FolderName], [ProjectName], [TableName], [BackupFilePath], [SQLBrowserServiceName], etc., are updated to reflect your environment.
+	2. Invoke-Sqlcmd Module: To use commands like Invoke-Sqlcmd, ensure the SQLServer PowerShell module is installed on the machine running the script. 
+		a. Install it using: Install-Module -Name SqlServer
+	3. Permissions: Running these commands typically requires SQL Server administrative privileges or at least access to the SQL Server instance. Ensure you are logged in with the appropriate credentials.
