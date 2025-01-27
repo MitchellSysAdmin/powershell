@@ -1,0 +1,4 @@
+# Customization: Replace [SQLBrowserServiceName] with the name of your SQL Server Browser service.
+# Use Case: Stops the SQL Server Browser service for security or maintenance purposes.
+
+Stop-Service -Name "[SQLBrowserServiceName]"
