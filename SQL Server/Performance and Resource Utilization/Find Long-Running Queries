@@ -1,0 +1,4 @@
+# Customization: Replace [SQLServerInstanceName] with the SQL Server instance name and [ThresholdMinutes] with the threshold in minutes (e.g., 5).
+# Use Case: Identifies queries that have been running for longer than a specified time.
+
+Invoke-Sqlcmd -ServerInstance "[SQLServerInstanceName]" -Query "SELECT * FROM sys.dm_exec_requests WHERE start_time < DATEADD(minute, -[ThresholdMinutes], GETDATE())"
