@@ -1,0 +1,10 @@
+Veeam Backup & Replication comes with the PowerShell extension
+A Veeam Backup PowerShell module that is added to your machine when you either install Veeam Backup & Replication server or the Veeam Backup & Replication Console. 
+The Veeam Backup PowerShell module allows you to do almost all operations that are available in the user interface. 
+Keep in mind that actions performed with PowerShell have the same force as actions performed using Veeam Backup & Replication: 
+
+Requirements
+  1. To run Veeam PowerShell cmdlets, you must have Veeam Backup Administrator role. For more information, see Users and Roles.
+  2. A machine that runs the PowerShell session must have Windows PowerShell version 5.1 installed.
+
+Veeam Backup & Replication PowerShell Documentatrion: https://helpcenter.veeam.com/docs/backup/powershell/getting_started.html?ver=120
