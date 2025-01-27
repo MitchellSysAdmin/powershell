@@ -1,0 +1,4 @@
+# Customization: Replace [SQLServerInstanceName], [FolderName], and [ProjectName] with the SQL Server instance name, SSIS folder name, and project name, respectively.
+# Use Case: Checks whether an SSIS project is properly configured and ready for execution.
+
+Invoke-Sqlcmd -ServerInstance "[SQLServerInstanceName]" -Query "EXEC SSISDB.catalog.validate_project @folder_name='[FolderName]', @project_name='[ProjectName]'"
