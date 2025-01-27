@@ -1,0 +1,4 @@
+# Customization: Replace [SQLServerInstanceName] and [JobName] with the SQL Server instance name and the job name, respectively.
+# Use Case: Confirms whether a specific job is running, idle, or disabled.
+
+Invoke-Sqlcmd -ServerInstance "[SQLServerInstanceName]" -Query "EXEC msdb.dbo.sp_help_job @job_name='[JobName]', @job_aspect='JOB'"
