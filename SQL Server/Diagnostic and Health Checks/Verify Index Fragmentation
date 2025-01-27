@@ -1,0 +1,4 @@
+# Customization: Replace [SQLServerInstanceName] with your SQL Server instance name.
+# Use Case: Returns fragmentation details for database indexes.
+
+Invoke-Sqlcmd -ServerInstance "[SQLServerInstanceName]" -Query "SELECT * FROM sys.dm_db_index_physical_stats (NULL, NULL, NULL, NULL, 'LIMITED')"
