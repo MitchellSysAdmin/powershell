@@ -1,0 +1,4 @@
+# Customization: Replace [SQLServerInstanceName] with your SQL Server instance name.
+# Use Case: Enables deadlock tracing to identify and troubleshoot deadlocks.
+
+Invoke-Sqlcmd -ServerInstance "[SQLServerInstanceName]" -Query "DBCC TRACEON(1222)"
