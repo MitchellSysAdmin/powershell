@@ -1,0 +1,4 @@
+# Customization: Replace [SQLServerAgentServiceName] with the name of your SQL Server Agent service (e.g., SQLSERVERAGENT or SQLSERVERAGENT$InstanceName).
+# Use Case: Restarts the SQL Server Agent to resolve job execution issues or apply changes.
+
+Restart-Service -Name "[SQLServerAgentServiceName]"
