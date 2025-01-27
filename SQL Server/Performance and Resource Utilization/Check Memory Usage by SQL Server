@@ -1,0 +1,4 @@
+# Customization: Replace [SQLProcessName] with the name of the SQL Server process (e.g., sqlservr).
+# Use Case: Monitors memory usage of SQL Server processes to detect potential bottlenecks.
+
+Get-Process | Where-Object { $_.Name -like "[SQLProcessName]" } | Select-Object Name, WorkingSet
