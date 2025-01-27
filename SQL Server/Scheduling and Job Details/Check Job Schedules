@@ -1,0 +1,4 @@
+# Customization: Replace [SQLServerInstanceName] with your SQL Server instance name.
+# Use Case: Lists schedules associated with SQL Server jobs.
+
+Invoke-Sqlcmd -ServerInstance "[SQLServerInstanceName]" -Query "SELECT * FROM msdb.dbo.sysjobschedules"
