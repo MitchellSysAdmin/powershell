@@ -1,0 +1,4 @@
+# Customization: Replace [SQLServerInstanceName] with the name of your SQL Server instance.
+# Use Case: Searches for errors in the SQL Server error log.
+
+Invoke-Sqlcmd -ServerInstance "[SQLServerInstanceName]" -Query "EXEC xp_readerrorlog 0, 1, 'Error'"
