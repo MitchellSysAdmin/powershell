@@ -1,0 +1,4 @@
+# Customization: Replace [Keyword] with a search keyword (e.g., "job"), and [NumberOfEntries] with the number of logs to retrieve.
+# Use Case: Filters for errors specifically related to SQL Server Agent jobs.
+
+Get-EventLog -LogName "Application" -Message "*[Keyword]*" -Newest [NumberOfEntries]
