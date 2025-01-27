@@ -1,0 +1,4 @@
+# Customization: Replace [SQLServerServiceName] with the name of your SQL Server service (e.g., MSSQLSERVER or MSSQL$InstanceName).
+# Use Case: Restarts the SQL Server service to apply configuration changes or recover from an issue.
+
+Restart-Service -Name "[SQLServerServiceName]"
