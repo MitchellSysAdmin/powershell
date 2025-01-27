@@ -1,0 +1,4 @@
+# Customization: Replace [SQLBrowserServiceName] with the name of your SQL Server Browser service (typically SQLBrowser).
+# Use Case: Starts the SQL Server Browser service to allow named instance discovery.
+
+Start-Service -Name "[SQLBrowserServiceName]"
