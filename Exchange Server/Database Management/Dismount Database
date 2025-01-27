@@ -1,0 +1,3 @@
+#	○ Description: Mounts a dismounted mailbox database.
+# ○ Use Case: Bring a dismounted database back online.
+Dismount-Database -Identity "DB01"
