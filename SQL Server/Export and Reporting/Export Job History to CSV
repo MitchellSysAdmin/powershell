@@ -1,0 +1,4 @@
+# Customization: Replace [SQLServerInstanceName] with your SQL Server instance name and [ExportFilePath] with the path for the exported CSV file.
+# Use Case: Exports job history to a CSV file for analysis.
+
+Invoke-Sqlcmd -ServerInstance "[SQLServerInstanceName]" -Query "SELECT * FROM msdb.dbo.sysjobhistory" | Export-Csv -Path "[ExportFilePath]"
