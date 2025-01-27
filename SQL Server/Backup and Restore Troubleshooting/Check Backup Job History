@@ -1,0 +1,4 @@
+# Customization: Replace [SQLServerInstanceName] with your SQL Server instance name.
+# Use Case: Retrieves a history of all backups performed on the SQL Server.
+
+Invoke-Sqlcmd -ServerInstance "[SQLServerInstanceName]" -Query "SELECT * FROM msdb.dbo.backupset"
